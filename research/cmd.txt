@@ -1,0 +1,10 @@
+openssl ecparam -out ESPICOHSMCA00001.pem -name prime256v1 -genkey
+openssl pkcs8 -topk8 -nocrypt -in ESPICOHSMCA00001.pem -outform DER -out ESPICOHSMCA00001.pkcs8
+cvc-create --role=cvca --type=at --chr=ESPICOHSMCA00001 --days=3650 --sign-key=ESPICOHSMCA00001.pkcs8 --scheme=ECDSA_SHA_256
+
+openssl ecparam -out ESPICOHSMDV00001.pem -name prime256v1 -genkey
+openssl pkcs8 -topk8 -nocrypt -in ESPICOHSMDV00001.pem -outform DER -out ESPICOHSMDV00001.pkcs8
+openssl ec -in ESPICOHSMDV00001.pem -out ESPICOHSMDV00001.pub -pubout -outform DER
+cvc-create --role=dv_domestic --type=at --chr=ESPICOHSMDV00001 --days=1820 --sign-key=ESPICOHSMCA00001.pkcs8 --scheme=ECDSA_SHA_256 --sign-as=ESPICOHSMCA00001.cvcert --public-key=ESPICOHSMDV00001.pub
+
+cvc-create --role=terminal --type=at --chr=ESPICOHSMTR00002 --days=365 --sign-key=ESPICOHSMDV00001.pkcs8 --scheme=ECDSA_SHA_256 --sign-as=ESPICOHSMDV00001.cvcert --public-key=public_key.pub
