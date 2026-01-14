@@ -34,6 +34,10 @@ To:
             input_json = input("Enter a JSON string: ")
             j = json.loads(input_json)
 ```
+Also, uncomment this line:
+```
+            #print(f'Public Point: {hexlify(Y).decode()}')
+```
 
 ## Run pico-hsm-tool.py
 https://github.com/librekeys/pico-hsm/blob/master/tools/pico-hsm-tool.py
@@ -83,3 +87,4 @@ ESPICOHSMCA00001: new CVC(new ByteString("***", HEX))
 Now we can use SCS3 to manage picohsm:
 
 ![SCS3](SCS3.png)
+
