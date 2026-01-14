@@ -64,9 +64,7 @@ python convertcvc.py
 Open a notepad, copy all the output
 
 ## Uploade cert
-Modify `ret.json` based on the output
-Use any json minify tool(search on google) compress ret.json to 1 line
-Paste compressed json to window `pico-hsm-tool.py`
+Paste `Json:` to window `pico-hsm-tool.py`
 Script should print `Certificate uploaded successfully!`
 
 ## Modify SCS3 tool
@@ -83,4 +81,5 @@ ESPICOHSMCA00001: new CVC(new ByteString("***", HEX))
 ```
 
 Now we can use SCS3 to manage picohsm:
+
 ![SCS3](SCS3.png)
