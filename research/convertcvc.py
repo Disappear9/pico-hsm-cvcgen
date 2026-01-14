@@ -1,5 +1,6 @@
 import binascii
 import base64
+import json
 
 try:
 	with open('ESPICOHSMCA00001.cvcert', 'rb') as cafileh:
@@ -16,10 +17,7 @@ except Exception as e:
 try:
 	with open('ESPICOHSMCA00001.cvcert', 'rb') as cafile:
 		content = cafile.read()
-		print("cacert:")
-		print("===================================")
-		print(base64.urlsafe_b64encode(content))
-		print("===================================")
+		cacert = base64.urlsafe_b64encode(content)
 except FileNotFoundError:
 	print("File not found.")
 except Exception as e:
@@ -29,10 +27,7 @@ except Exception as e:
 try:
 	with open('ESPICOHSMDV00001.cvcert', 'rb') as dvfile:
 		content = dvfile.read()
-		print("dvcert:")
-		print("===================================")
-		print(base64.urlsafe_b64encode(content))
-		print("===================================")
+		dvcert = base64.urlsafe_b64encode(content)
 except FileNotFoundError:
 	print("File not found.")
 except Exception as e:
@@ -41,11 +36,18 @@ except Exception as e:
 try:
 	with open('ESPICOHSMTR00002.cvcert', 'rb') as cvfile:
 		content = cvfile.read()
-		print("cvcert:")
-		print("===================================")
-		print(base64.urlsafe_b64encode(content))
-		print("===================================")
+		cvcert = base64.urlsafe_b64encode(content)
 except FileNotFoundError:
 	print("File not found.")
 except Exception as e:
 	print(f"An error occurred: {e}")
+
+data = {}
+data['cvcert'] = cvcert
+data['dvcert'] = dvcert
+data['cacert'] = cacert
+json_data = json.dumps(data, separators=(',', ':'))
+print("Json:")
+print("===================================")
+print(json_data)
+print("===================================")
